@@ -4,7 +4,7 @@ import Login from './Login'
 import Slider from './Slider'
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState("huz")
   return (
       <div className='app'>
         {!user ?(
