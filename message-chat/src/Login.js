@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components';
 import ChatIcon from '@mui/icons-material/Chat';
 import AndroidIcon from '@mui/icons-material/Android';
+import AppleIcon from '@mui/icons-material/Apple';
+import LaptopMacIcon from '@mui/icons-material/LaptopMac';
+import Info from './Info';
 
 function Login() {
   return (
@@ -26,18 +29,33 @@ function Login() {
                  <Span>*Data charges may apply. Contact your provider for details.</Span>
 
                  <Lognimg>
-                 <AndroidIcon/> Android
-                 <AndroidIcon/> Android
-                 <AndroidIcon/> Android
+                    <Icons>
+                    <AndroidIcon fontSize='large'/>
+                    <AndrdName>Android</AndrdName>
+                    </Icons>
+
+                    <Icons>
+                    <AppleIcon fontSize='large'/>
+                    <AndrdName>iPhone</AndrdName>
+                    </Icons>
+
+                    <Icons>
+                     <LaptopMacIcon fontSize='large'/>
+                    <AndrdName>Mac or Windows PC</AndrdName>
+                    </Icons>
                  </Lognimg>
+
              </LognLeft>
 
              <LoginRght>
                 <Img>
                    <img src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1"/>
                 </Img>
+                <Button>Login with Google</Button>
              </LoginRght>
         </LognFlx>
+
+        <Info/>
              
      </Container>
   )
@@ -122,13 +140,29 @@ const Lognimg = styled.div`
     margin-top: 20px;
     margin-left: 50px;
     margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
+     display: flex;
+  flex-direction: column;
 `
 
 const LoginRght = styled.div`
     margin-left: 22%;
     margin-top: -2%;
+    
+`
+
+const Icons = styled.div`
+     display: flex;
+     margin-bottom:6px;
+      .MuiSvgIcon-root{
+         color: #1a73e8;
+      }
+`;
+
+const AndrdName = styled.div`
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 `
 
 
@@ -143,5 +177,11 @@ const Img = styled.div`
      }
 `
 
-
+const Button = styled.button`
+   margin-top: 10px;
+   margin-left: -105px;
+   padding: 5px;
+   font-size: 19px;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+`
 
