@@ -41,6 +41,13 @@ function Practice({addNewChat}) {
      <div onClick={createChat}>
         <h2>jnj</h2>
      </div>
+
+/* <p className={`chat-message ${true && 'chat-reciever'}`}>    //true means When you signin then will show blue one
+<ChatName>Huzaifa Dabir</ChatName>
+ <ChatEn>Hey Guys</ChatEn>
+  <Chattimestamp>3:52pm</Chattimestamp>     
+</p> */
+
   )
 }
 

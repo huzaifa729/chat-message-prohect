@@ -55,7 +55,8 @@ function Slider() {
           <SidebarChat/>
           <SidebarChat/>
           <SidebarChat/>
-          
+          <SidebarChat/>
+          <SidebarChat/>
         </SideChat>
 
      </Container>
@@ -67,6 +68,7 @@ export default Slider;
 const Container = styled.div`
   flex: 0.35;
   border-right: 3px solid floralwhite;
+  
 `
 
 const Slide = styled.div`
