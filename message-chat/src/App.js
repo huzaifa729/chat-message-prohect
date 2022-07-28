@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
+import Chat from './Chat'
 import Login from './Login'
 import Slider from './Slider'
 
@@ -15,6 +16,7 @@ function App() {
 
      <div className='app-bdy'>
           <Slider/>
+          <Chat/>
       </div>
         )}
     </div>
