@@ -1,3 +1,4 @@
+import SelectInput from '@mui/material/Select/SelectInput'
 import React, { useEffect, useState } from 'react'
 
 function Practice() {
@@ -27,6 +28,10 @@ import React from 'react'
 
 function Practice({addNewChat}) {
 
+  const sendMessage = (e) =>{
+
+  }
+
     const CreateChat = ()=>{
         const Name = prompt ("Please");
 
@@ -40,6 +45,10 @@ function Practice({addNewChat}) {
   ):(
      <div onClick={createChat}>
         <h2>jnj</h2>
+
+
+<input value={input} onChange={e=>SelectInput(e.target.value)}></input>
+        <button type='submit' onClick={sendMessage}></button>
      </div>
 
 /* <p className={`chat-message ${true && 'chat-reciever'}`}>    //true means When you signin then will show blue one
@@ -52,3 +61,20 @@ function Practice({addNewChat}) {
 }
 
 export default Practice
+
+
+
+
+// const [input, setInput] = usestate("");
+
+// const message = (e) => {
+//    e.preventDefault();
+//    console.log("You typed >>>", input);
+
+//    setInput("")
+// }
+
+
+// <button type='submit' onClick={message}></button>
+
+// <input value={input} onChange={(e)=> setInput(e.target.value)} ></input>

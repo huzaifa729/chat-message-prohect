@@ -1,19 +1,30 @@
 import { Avatar, IconButton } from '@mui/material'
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MoodIcon from '@mui/icons-material/Mood';
 // import AttachFileIcon from '@mui/icons-material/AttachFile';
+import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined';
 
 function Chat() {
+  const [input, setInput] = useState('');
+
+
+  const sendMessage = (e) =>{
+      e.preventDefault();
+      console.log("You typed >>>", input);
+
+      setInput("");
+  }
+
   return (
       <Container>
           <Chats>
              <Avatar/>
              <ChatIn>
               <Name>Name</Name>
-              <LastSeen>Last seen at..</LastSeen>
+              <LastSeen>Last seen at...</LastSeen>
              </ChatIn>
              <ChatIcon>
                 <IconButton>
@@ -51,6 +62,24 @@ function Chat() {
                     <svg viewBox="0 0 24 24" width="24" height="24" class=""><path fill="currentColor" d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z"></path></svg>
                  </IconButton>
             </ChatTk> 
+
+            <Form>
+            
+            <ChatSearch>
+          <CSeadrch value={input} onChange={(e) => setInput(e.target.value)}   type="text"   placeholder="Type a message"  />
+          </ChatSearch> 
+           <button  type='submit' onClick={sendMessage}>Send a message</button>
+         
+         </Form>    
+        
+
+
+             <AgnIcn>
+                <IconButton>
+                  <MicNoneOutlinedIcon/>
+                </IconButton>
+             </AgnIcn>
+
           </ChatFooter>
 
       </Container>
@@ -105,14 +134,16 @@ const ChatIcon = styled.div`
 
 
 const Chatbody = styled.div`
-  background-image: url("https://png.pngtree.com/background/20210715/original/pngtree-green-yellow-white-memphis-gradient-background-picture-image_1263475.jpg");
+  /* background-image: url("https://png.pngtree.com/background/20210715/original/pngtree-green-yellow-white-memphis-gradient-background-picture-image_1263475.jpg"); */
    flex: 1;
    background-repeat: repeat;
    background-position: center;
    padding: 30px;
-   overflow: scroll;
+   /* overflow: scroll; */
    margin-top: 0px;
    object-fit: contain;
+   margin-left: 10px;
+   /* background-color: orangered; */
 
    .chat-message{
   background-color: ghostwhite;
@@ -178,9 +209,63 @@ const ChatFooter = styled.div`
   margin-top: 30px;
   margin-left: 10px;
   margin-bottom: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
 `
 
 const ChatTk = styled.div`
-   
+
 `
+
+const ChatSearch  = styled.div`
+   margin-left: 10px;
+   /* border: 5px solid bisque; */
+  /* width: 250px; */
+    /* display:none; */
+ 
+`
+
+const CSeadrch = styled.input`
+  outline: none;
+  /* flex: 1; */
+   /* width: 100%;  */
+   width: 400px;
+  margin-left: 10px;
+  padding: 5px 5px;
+  border: 6px solid whitesmoke;
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: none;
+  border-radius: 3px;
+ 
+`
+
+const Form = styled.div`
+  /* display: none; */
+   display: flex; 
+
+ 
+    button{
+    margin-left: 15px;
+   /* display: none;  */
+   background: none;
+   border-radius: 5px;
+   height: 40px;
+   margin-top: 5px;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   font-size: 18px;
+  }
+   
+  
+`
+
+const AgnIcn = styled.div`
+ color: gray;
+`
+
+
+
+
 
