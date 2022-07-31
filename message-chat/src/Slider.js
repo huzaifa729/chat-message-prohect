@@ -1,21 +1,34 @@
 import { Avatar, IconButton } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SidebarChat from './SidebarChat';
+import db from './firebase';
 
 function Slider() {
 
-  const createChat = () =>{
-      const Name = prompt ("Please enter name for chat");
+  const [rooms, setRooms] = useState([]);
 
-      if(Name){
-        // do some clever database stuff
-      }
-}
+  useEffect(() => {
+    const unsubscribe =  db.collection('rooms').onSnapshot(snapshot => (
+         setRooms(snapshot.docs.map(doc=>
+          ({
+              id: doc.id,
+              data: doc.data(), 
+          })
+          ))
+       ))   
+            return () => {
+              unsubscribe();
+            }
+  },[])
+
+
+
+    
   return  (
      <Container>
         <Slide>
@@ -40,7 +53,7 @@ function Slider() {
        <Sch>
           <SearchInput>
             <SearchIcon fontSize='medium'/> 
-              <Search type="text" onClick={createChat} placeholder="Search or start new chat"/>
+              <Search type="text"  placeholder="Search or start new chat"/>
               </SearchInput>
 
               <IconButton>
@@ -51,12 +64,13 @@ function Slider() {
 
         <SideChat>
           <SidebarChat addNewChat/>
-          <SidebarChat/>
-          <SidebarChat/>
-          <SidebarChat/>
-          <SidebarChat/>
-          <SidebarChat/>
-          <SidebarChat/>
+          {rooms.map(room => (
+                <SidebarChat 
+                key={room.id} 
+                id={room.id}
+                name={room.data.name}
+                />
+              ))}
         </SideChat>
 
      </Container>
@@ -122,5 +136,5 @@ const Search = styled.input`
 const SideChat = styled.div`
 margin-top: 20px; 
 flex: 1;
-/* overflow-y: scroll; */
+ /* overflow-y: scroll;  */
 `

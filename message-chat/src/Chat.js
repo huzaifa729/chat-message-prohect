@@ -139,7 +139,7 @@ const Chatbody = styled.div`
    background-repeat: repeat;
    background-position: center;
    padding: 30px;
-   /* overflow: scroll; */
+    /* overflow: scroll;  */
    margin-top: 0px;
    object-fit: contain;
    margin-left: 10px;
