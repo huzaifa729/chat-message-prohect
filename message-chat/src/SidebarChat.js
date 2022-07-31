@@ -1,27 +1,35 @@
-import { Avatar } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import db from './firebase';
 import SearchIcon from '@mui/icons-material/Search';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import db from './firebase';
 
-function SidebarChat({id, name, addNewChat}) {
+
+function SidebarChat({id,name,addNewChat}) {
 
     const [seed, setSeed] = useState('');
+
+    const createChat = () => {
+      const DataName = prompt("Please enter name for chat")
+
+          if(DataName){
+            // do some clever database stuff...
+
+            db.collection('collection').add({
+              name: DataName,
+            })
+
+          }
+    };
 
     useEffect(()=>{
        setSeed(Math.floor(Math.random() * 5000))  //Means every time you enter Avatar icon wil changed.
     },[]);
 
-    const createChat = () =>{
-      const DataName =  "Please";
 
-      if(DataName){
-        // do some clever database stuff
-          db.collection('rooms').add({
-              name: DataName,
-          })
-      }
-}
+
+
 
   return !addNewChat ? (
     <Container>
@@ -34,10 +42,20 @@ function SidebarChat({id, name, addNewChat}) {
      </SideChats>         
     </Container>
   ):(
+    // <SearchInput>
+    // <SearchIcon fontSize='medium'/> 
+    //   <Search type="text" onClick={createChat} placeholder="Search or start new chat"/>
+    //   </SearchInput>
+    <Sch>
     <SearchInput>
-    <SearchIcon fontSize='medium'/> 
-      <Search type="text" onClick={createChat} placeholder="Search or start new chat"/>
-      </SearchInput>
+     <SearchIcon fontSize='medium'/> 
+   <Search type="text" onClick={createChat} placeholder="Search or start new chat"/>
+   </SearchInput>
+
+           <IconButton>
+           <FilterListIcon/>
+           </IconButton>
+           </Sch>
   )
 }
 
@@ -62,12 +80,12 @@ const SidebarInfo = styled.div`
 
 const Name = styled.div`
   font-size: 18px;
-  font-style: oblique;
+ font-family: Verdana, Geneva, Tahoma, sans-serif;
 `
 
 const Message = styled.div`
   font-size: 18px;
-  font-style: oblique;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 `
 
 const SearchInput = styled.div`
@@ -79,6 +97,15 @@ align-items: center;
    .MuiSvgIcon-root{
     color: grey;
    }
+`
+
+const Sch = styled.div`
+  display: flex;
+  align-items: center;
+justify-content: space-around;
+margin-left: -10px;
+margin-top: 10px;
+margin-bottom: 30px;
 `
 
 const Search = styled.input`

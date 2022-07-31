@@ -220,7 +220,7 @@ const ChatTk = styled.div`
 `
 
 const ChatSearch  = styled.div`
-   margin-left: 10px;
+   margin-left: -50px;
    /* border: 5px solid bisque; */
   /* width: 250px; */
     /* display:none; */
@@ -248,7 +248,7 @@ const Form = styled.div`
 
  
     button{
-    margin-left: 15px;
+    margin-left: 25px;
    /* display: none;  */
    background: none;
    border-radius: 5px;

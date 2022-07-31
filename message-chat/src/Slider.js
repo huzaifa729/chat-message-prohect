@@ -3,28 +3,32 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
-import SearchIcon from '@mui/icons-material/Search';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import SidebarChat from './SidebarChat';
 import db from './firebase';
+import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
+
+
 
 function Slider() {
 
-  const [rooms, setRooms] = useState([]);
+  const [collection, setCollection] = useState([]);
 
-  useEffect(() => {
-    const unsubscribe =  db.collection('rooms').onSnapshot(snapshot => (
-         setRooms(snapshot.docs.map(doc=>
-          ({
-              id: doc.id,
-              data: doc.data(), 
-          })
-          ))
-       ))   
-            return () => {
-              unsubscribe();
-            }
+  useEffect(()=>{
+   const unsubscribe =  db.collection('collection').onSnapshot(snapshot => (
+         setCollection(snapshot.docs.map(doc=>
+            ({
+               id:doc.id,
+               data:doc.data(),
+            })
+          ))    
+     ))
+
+       return () => {
+               unsubscribe();
+       }
   },[])
+
+
 
 
 
@@ -50,25 +54,25 @@ function Slider() {
            </SlideRight>
           </SliderAvtrIcns>
 
-       <Sch>
-          <SearchInput>
-            <SearchIcon fontSize='medium'/> 
-              <Search type="text"  placeholder="Search or start new chat"/>
-              </SearchInput>
+       {/* <Sch>
+       <SearchInput>
+        <SearchIcon fontSize='medium'/> 
+      <Search type="text" onClick={createChat} placeholder="Search or start new chat"/>
+      </SearchInput>
 
               <IconButton>
               <FilterListIcon/>
               </IconButton>
-              </Sch>
+              </Sch> */}
         </Slide>
 
         <SideChat>
           <SidebarChat addNewChat/>
-          {rooms.map(room => (
+          {collection.map(stores => (
                 <SidebarChat 
-                key={room.id} 
-                id={room.id}
-                name={room.data.name}
+                key={stores.id} 
+                id={stores.id}
+                name={stores.data.name}
                 />
               ))}
         </SideChat>
