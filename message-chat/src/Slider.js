@@ -5,7 +5,7 @@ import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import SidebarChat from './SidebarChat';
 import db from './firebase';
-import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
+
 
 
 

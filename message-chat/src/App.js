@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { BrowserRouter,Routes,Route,Link } from 'react-router-dom'
 import './App.css'
 import Chat from './Chat'
 import Login from './Login'
@@ -11,12 +12,17 @@ function App() {
         {!user ?(
             <Login/>
         ):(
+ <div className='app-bdy'>
+  <BrowserRouter>
+         <Slider/>
 
-        
-
-     <div className='app-bdy'>
-          <Slider/>
-          <Chat/>
+         <Routes>
+          <Route path="/collection/:storeId" element={<Chat/>}/>
+          <Route path="/" element={<Chat/>}/>
+         </Routes>
+         
+  </BrowserRouter>
+      
       </div>
         )}
     </div>

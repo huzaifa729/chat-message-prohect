@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import db from './firebase';
-
+import { Link } from 'react-router-dom';
 
 function SidebarChat({id,name,addNewChat}) {
 
@@ -32,6 +32,7 @@ function SidebarChat({id,name,addNewChat}) {
 
 
   return !addNewChat ? (
+    <Link to={`/collection/${id}`}>
     <Container>
       <SideChats>
       <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
@@ -41,6 +42,7 @@ function SidebarChat({id,name,addNewChat}) {
           </SidebarInfo>
      </SideChats>         
     </Container>
+    </Link>
   ):(
     // <SearchInput>
     // <SearchIcon fontSize='medium'/> 

@@ -1,15 +1,28 @@
 import { Avatar, IconButton } from '@mui/material'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MoodIcon from '@mui/icons-material/Mood';
 // import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined';
+import { useParams } from 'react-router';
+import db from './firebase';
 
 function Chat() {
   const [input, setInput] = useState('');
+  const { storeId } = useParams();
+  const [dataName,setDataName] = useState('');
 
+
+  useEffect(()=>{
+    if(storeId){
+        db.collection('collection').doc(storeId).onSnapshot(snapshot=>(
+             setDataName(snapshot.data().name)
+        ))
+      }
+  },[storeId])
+  
 
   const sendMessage = (e) =>{
       e.preventDefault();
@@ -23,7 +36,7 @@ function Chat() {
           <Chats>
              <Avatar/>
              <ChatIn>
-              <Name>Name</Name>
+              <Name>{dataName}</Name>
               <LastSeen>Last seen at...</LastSeen>
              </ChatIn>
              <ChatIcon>
