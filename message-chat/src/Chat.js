@@ -8,19 +8,30 @@ import MoodIcon from '@mui/icons-material/Mood';
 import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined';
 import { useParams } from 'react-router';
 import db from './firebase';
+// import firebase from 'firebase/compat/app';
+
 
 function Chat() {
   const [input, setInput] = useState('');
   const { storeId } = useParams();
   const [dataName,setDataName] = useState('');
+  const [messages, setMessages] = useState([])
+  // const [{user}, dispatch] = useStateValue();
 
 
   useEffect(()=>{
     if(storeId){
-        db.collection('collection').doc(storeId).onSnapshot(snapshot=>(
-             setDataName(snapshot.data().name)
-        ))
-      }
+        db.collection('collection')
+        .doc(storeId)
+        .onSnapshot((snapshot)=>
+         setDataName(snapshot.data().name))
+       
+         db.collection('collection').doc(storeId).collection('messages')
+         .orderBy('timestamp','asc')
+         .onSnapshot((snapshot) =>(
+            setMessages(snapshot.docs.map((doc) => doc.data()))
+         ))
+}
   },[storeId])
   
 
@@ -51,17 +62,19 @@ function Chat() {
 
 
           <Chatbody> 
-           <p className={`chat-message ${true && 'chat-reciever'}`}>   
-             <ChatName>Huzaifa Dabir</ChatName>
-              <ChatEn>Hey Guys</ChatEn>
-               <Chattimestamp>3:52pm</Chattimestamp>     
+            {messages.map((message)=>(
+           
+           <p className={`chat-message ${true && 'chat-reciever'}`}>  
+             <ChatName>{message.name}</ChatName>
+              <ChatEn>{message.message}</ChatEn>
+              {/* <ChatEn>{message.message2}</ChatEn> */}
+              <Chattimestamp>
+                {new Date(message.timestamp?.toDate()).toUTCString()}
+              </Chattimestamp>
             </p>
 
-            <p className={`chat-message ${true && 'chat-reciever'}`}>  
-             <ChatName>Huzaifa Dabir</ChatName>
-              <ChatEn>Hey Guys</ChatEn>
-              <Chattimestamp>3:52pm</Chattimestamp>
-            </p>
+            ))}
+           
         </Chatbody>
 
           <ChatFooter>
@@ -161,7 +174,7 @@ const Chatbody = styled.div`
    .chat-message{
   background-color: ghostwhite;
     width: fit-content;
-   border-radius: 8px;
+   border-radius: 5px;
    position: relative;
    margin-bottom: 30px;
    display: flex;
@@ -171,9 +184,12 @@ const Chatbody = styled.div`
   .chat-reciever{
       margin-left: auto;
      margin-right: 23px;
-     background-color: dodgerblue;
-     color: whitesmoke;
+     /* background-color: dodgerblue; */
+     color: black;
      font-family: Verdana, Geneva, Tahoma, sans-serif;
+     background: none;
+     border: 3px solid black;
+   
   }
 ` 
 
@@ -195,12 +211,13 @@ const Chatbody = styled.div`
 const ChatName = styled.div`
    /* margin-top: -16px;
    margin-left: -80px; */
-   font-size: xx-small;
-   font-weight: bold;
+    font-size: 17px;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
    position: absolute;
-   top: -15px;
-   margin-left: 6px;
-   color: black;
+   top: -25px;
+   margin-left: 2px;
+   color: grey;
+  font-weight: 550;
 `
 
 
@@ -214,7 +231,8 @@ const Chattimestamp = styled.div`
 const ChatEn = styled.div`
   margin-left: 6px;
   margin-top: 3px;
-  font-size: 17px;
+  font-size: 19px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 `
 
 
