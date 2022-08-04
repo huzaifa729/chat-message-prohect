@@ -5,8 +5,29 @@ import AndroidIcon from '@mui/icons-material/Android';
 import AppleIcon from '@mui/icons-material/Apple';
 import LaptopMacIcon from '@mui/icons-material/LaptopMac';
 import Info from './Info';
+import { auth, provider } from './firebase';
+import { useStateValue } from './StateProvider';
+import { actionTypes } from './reducer';
 
 function Login() {
+
+   const [state,dispatch] = useStateValue();
+ 
+   const signIn = e => {
+      auth.signInWithPopup(provider)
+      .then((result) =>{
+    
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: result.user,
+          })
+       
+           
+        console.log(result)
+      })
+      .catch(error => alert(error.message))
+   }
+
   return (
      <Container>
           <LogoIcon>
@@ -51,7 +72,7 @@ function Login() {
                 <Img>
                    <img src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1"/>
                 </Img>
-                <Button>Login with Google</Button>
+                <Button type="submit" onClick={signIn}>Login with Google</Button>
              </LoginRght>
         </LognFlx>
 
@@ -64,13 +85,14 @@ function Login() {
 export default Login;
 
 const Container = styled.div`
-    margin-top: 20px;
+    margin-top: 1px;
   // margin-left: 23px;
 `
 
 const LogoIcon = styled.div`
       display: flex;
-      margin-left: 55px;
+      margin-left: 65px;
+      padding-top: 20px;
      
       .MuiSvgIcon-root{
           background-color: rgb(24, 90, 188);

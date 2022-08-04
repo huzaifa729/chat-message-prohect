@@ -1,4 +1,4 @@
-import { Avatar, IconButton } from '@mui/material'
+import { Avatar, IconButton, SliderRoot } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,6 +8,7 @@ import MoodIcon from '@mui/icons-material/Mood';
 import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined';
 import { useParams } from 'react-router';
 import db from './firebase';
+import { useStateValue } from './StateProvider';
 // import firebase from 'firebase/compat/app';
 
 
@@ -16,7 +17,7 @@ function Chat() {
   const { storeId } = useParams();
   const [dataName,setDataName] = useState('');
   const [messages, setMessages] = useState([])
-  // const [{user}, dispatch] = useStateValue();
+ const [{user}, dispatch] = useStateValue();
 
 
   useEffect(()=>{
@@ -45,7 +46,8 @@ function Chat() {
   return (
       <Container>
           <Chats>
-             <Avatar/>
+             {/* <Avatar src={user.photoURL}/> */}
+             <Avatar src={user.photoURL}/>
              <ChatIn>
               <Name>{dataName}</Name>
               <LastSeen>Last seen at...</LastSeen>
