@@ -127,7 +127,7 @@ const Copyright = styled.div`
 
 const Privacy = styled.div`
  margin-bottom: 4px;
-  margin-left: 44%;
+  margin-left: 50%;
   margin-top: 8px;
     font-size: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;

@@ -70,9 +70,12 @@ function Login() {
 
              <LoginRght>
                 <Img>
-                   <img src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1"/>
+                <ChatIcon fontSize='medium'/>
+                <LogoNamens>Messenger App</LogoNamens>
                 </Img>
-                <Button type="submit" onClick={signIn}>Login with Google</Button>
+                <Button type="submit" onClick={signIn}> Login with Google 
+                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRVUh2KFBlPv3Lnflm9u5a1rjLRDKw63RMAW8_bZntDpkWnPc1kKANT4sElr6zJieIv64&usqp=CAU"/>
+                </Button>
              </LoginRght>
         </LognFlx>
 
@@ -87,6 +90,7 @@ export default Login;
 const Container = styled.div`
     margin-top: 1px;
   // margin-left: 23px;
+  background-color: white;
 `
 
 const LogoIcon = styled.div`
@@ -191,19 +195,40 @@ const AndrdName = styled.div`
 
 const Img = styled.div`
      margin-left: -57%;
+   margin-top: 35%;
+
+   .MuiSvgIcon-root{
+          background-color: rgb(24, 90, 188);
+           color: white; 
+          border-radius: 10%;
+          font-size: 40px;
+          margin-bottom: 10px;
+          /* padding: 20px;
+          font-size: 40px; */
+      }
      
-     img{
-      width: 275px;
-      background: none;
-      height: 300px;
-     }
+`
+const LogoNamens = styled.div`
+ font-size: 35px;
+ font-family: Verdana, Geneva, Tahoma, sans-serif;
+ margin-left: 5px;
 `
 
 const Button = styled.button`
-   margin-top: 10px;
-   margin-left: -105px;
+   margin-top: 20px;
+   margin-left: -145px;
    padding: 5px;
-   font-size: 19px;
+   font-size: 20px;
    font-family: Verdana, Geneva, Tahoma, sans-serif;
+   background: none;
+   border: 5px solid black;
+
+    img{
+      width: 60px;
+      margin-top: -7px;
+      background: none;
+      object-fit: contain;
+ 
+    }
 `
 

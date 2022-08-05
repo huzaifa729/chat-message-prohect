@@ -4,21 +4,24 @@ import styled from 'styled-components';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import SidebarChat from './SidebarChat';
-import db, { auth } from './firebase';
+import db from './firebase';
 import { useStateValue } from './StateProvider';
-
+import { auth } from './firebase';
+// import { Link } from 'react-router-dom';
 
 
 
 function Slider() {
-  const [{user},dispatch] = useStateValue();
+  const [{user}, dispatch]  = useStateValue();
+
   const [collection, setCollection] = useState([]);
 
-  const handle = () =>{
-    if(user){
-       auth.signOut();
+  const handleAuthentication = () =>{
+    if (user){
+      auth.signOut();
     }
   }
+
 
   useEffect(()=>{
    const unsubscribe =  db.collection('collection').onSnapshot(snapshot => (
@@ -41,8 +44,8 @@ return  (
      <Container>
         <Slide>
           <SliderAvtrIcns>
-            <AvtrBtn >
-          <Avatar src={user.photoURL} />
+            <AvtrBtn onClick={handleAuthentication} >
+          <Avatar   src={user.photoURL} />
            <Titlen> {user.displayName}</Titlen>
           </AvtrBtn>
            <SlideRight>
@@ -58,10 +61,6 @@ return  (
             <MoreVertOutlinedIcon/>
           </IconButton>
 
-          <div className='text-image' onClick={handle}>
-                          
-                            <span className="text">Logout</span>
-                          </div>
            </SlideRight>
           </SliderAvtrIcns>
 

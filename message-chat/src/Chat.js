@@ -71,6 +71,7 @@ function Chat() {
                 <IconButton>
                    <MoreVertIcon/>
                 </IconButton>
+             
              </ChatIcon>
           </Chats>
 
@@ -177,10 +178,10 @@ const ChatIcon = styled.div`
 const Chatbody = styled.div`
   /* background-image: url("https://png.pngtree.com/background/20210715/original/pngtree-green-yellow-white-memphis-gradient-background-picture-image_1263475.jpg"); */
    flex: 1;
-   background-repeat: repeat;
-   background-position: center;
+   /* background-repeat: repeat;
+   background-position: center; */
    padding: 30px;
-    /* overflow: scroll;  */
+   overflow: scroll;  
    margin-top: 0px;
    object-fit: contain;
    margin-left: 10px;

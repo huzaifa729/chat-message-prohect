@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 function SidebarChat({id,name,addNewChat}) {
 
     const [seed, setSeed] = useState('');
-    const [messages, setMessages] = useState('')
+    const [messages, setMessages] = useState('');
 
     useEffect(()=>{
       if(id){
@@ -46,17 +46,19 @@ function SidebarChat({id,name,addNewChat}) {
 
 
   return !addNewChat ? (
-    <Link to={`/collection/${id}`}>
+  
     <Container>
+        <Link to={`/collection/${id}`}>
       <SideChats>
       <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
           <SidebarInfo>
              <Name>{name}</Name>
              <Message>{messages[0]?.message}</Message>
           </SidebarInfo>
-     </SideChats>         
-    </Container>
-    </Link>
+     </SideChats> 
+     </Link>
+  </Container>
+  
   ):(
     // <SearchInput>
     // <SearchIcon fontSize='medium'/> 
@@ -84,7 +86,8 @@ const Container = styled.div`
     margin-left: 37px;
 
    a{
-    background-color: red;
+      text-decoration: none !important;
+      color: black;
    }
 `
 
