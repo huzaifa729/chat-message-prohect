@@ -9,7 +9,7 @@ import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined';
 import { useParams } from 'react-router';
 import db from './firebase';
 import { useStateValue } from './StateProvider';
-// import firebase from 'firebase/compat/app';
+ import firebase from 'firebase/compat/app';
 
 
 function Chat() {
@@ -36,12 +36,18 @@ function Chat() {
   },[storeId])
   
 
-  const sendMessage = (e) =>{
-      e.preventDefault();
-      console.log("You typed >>>", input);
+  const sendMessage = (e) => {
+    e.preventDefault()
+    console.log("You typed >>>", input);
 
-      setInput("");
-  }
+       db.collection('collection').doc(storeId).collection('messages').add({
+         message: input,
+         name: user.displayName,
+         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+       })
+
+    setInput("");
+ }
 
   return (
       <Container>
@@ -50,7 +56,13 @@ function Chat() {
              <Avatar src={user.photoURL}/>
              <ChatIn>
               <Name>{dataName}</Name>
-              <LastSeen>Last seen at...</LastSeen>
+              <LastSeen>
+              Last seen {""}
+               {new Date(
+                messages[messages.length-1]?.
+                timestamp?.toDate()
+               ).toUTCString()}
+             </LastSeen>
              </ChatIn>
              <ChatIcon>
                 <IconButton>
@@ -66,7 +78,7 @@ function Chat() {
           <Chatbody> 
             {messages.map((message)=>(
            
-           <p className={`chat-message ${true && 'chat-reciever'}`}>  
+           <p className={`chat-message ${message.name === user.displayName && 'chat-reciever'}`}>  
              <ChatName>{message.name}</ChatName>
               <ChatEn>{message.message}</ChatEn>
               {/* <ChatEn>{message.message2}</ChatEn> */}
@@ -96,7 +108,7 @@ function Chat() {
             <ChatSearch>
           <CSeadrch value={input} onChange={(e) => setInput(e.target.value)}   type="text"   placeholder="Type a message"  />
           </ChatSearch> 
-           <button  type='submit' onClick={sendMessage}>Send a message</button>
+           <Button  type='submit' onClick={sendMessage}>Send a message</Button>
          
          </Form>    
         
@@ -140,6 +152,7 @@ const Chats = styled.div`
 const ChatIn = styled.div`
   flex: 1;
   margin-left: 10px;
+ 
 `
 
 const Name = styled.div`
@@ -178,7 +191,7 @@ const Chatbody = styled.div`
     width: fit-content;
    border-radius: 5px;
    position: relative;
-   margin-bottom: 30px;
+   margin-bottom: 40px;
    display: flex;
    padding: 2px 5px;
 }
@@ -280,8 +293,18 @@ const Form = styled.div`
    display: flex; 
 
  
-    button{
-    margin-left: 25px;
+
+   
+  
+`
+
+const AgnIcn = styled.div`
+ color: gray;
+`
+
+
+const Button = styled.div`
+  margin-left: 25px;
    /* display: none;  */
    background: none;
    border-radius: 5px;
@@ -289,13 +312,8 @@ const Form = styled.div`
    margin-top: 5px;
    font-family: Verdana, Geneva, Tahoma, sans-serif;
    font-size: 18px;
-  }
-   
-  
-`
-
-const AgnIcn = styled.div`
- color: gray;
+  border: 3px solid black;
+  padding: 3px 10px;
 `
 
 

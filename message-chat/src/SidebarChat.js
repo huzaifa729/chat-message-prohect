@@ -9,6 +9,20 @@ import { Link } from 'react-router-dom';
 function SidebarChat({id,name,addNewChat}) {
 
     const [seed, setSeed] = useState('');
+    const [messages, setMessages] = useState('')
+
+    useEffect(()=>{
+      if(id){
+            db.collection('collection')
+            .doc(id)
+            .collection('messages')
+            .orderBy('timestamp', 'desc')
+            .onSnapshot(snapshot=>
+                setMessages(snapshot.docs.map((doc)=>
+                doc.data()))
+            )
+      }
+    },[id]);
 
     const createChat = () => {
       const DataName = prompt("Please enter name for chat")
@@ -38,7 +52,7 @@ function SidebarChat({id,name,addNewChat}) {
       <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
           <SidebarInfo>
              <Name>{name}</Name>
-             <Message>Message</Message>
+             <Message>{messages[0]?.message}</Message>
           </SidebarInfo>
      </SideChats>         
     </Container>
@@ -63,8 +77,15 @@ function SidebarChat({id,name,addNewChat}) {
 
 export default SidebarChat;
 
+
+
+
 const Container = styled.div`
     margin-left: 37px;
+
+   a{
+    background-color: red;
+   }
 `
 
 const SideChats = styled.div`
